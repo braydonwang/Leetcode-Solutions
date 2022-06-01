@@ -38,7 +38,7 @@ public:
     }
 
 private:
-    Trie* t[26] = {};
+    unordered_map<char,Trie*> t;
     bool done = false;
 };
 
