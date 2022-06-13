@@ -5,7 +5,7 @@ public:
         perm(0,nums,ans);
         return ans;
     }
-    void perm(int ind, vector<int>& nums, vector<vector<int>>& ans) {
+    void perm(int ind, vector<int> nums, vector<vector<int>>& ans) {
         if (ind == nums.size()) {
             ans.push_back(nums);
             return;
