@@ -14,10 +14,8 @@ public:
                 r++;
             }
             if (l >= 0 && nums[i] > nums[l] && r < nums.size() && nums[i] > nums[r]) {
-                cout << i << endl;
                 ans++;
             } else if (l >= 0 && nums[i] < nums[l] && r < nums.size() && nums[i] < nums[r]) {
-                cout << i << endl;
                 ans++;
             }
         }
