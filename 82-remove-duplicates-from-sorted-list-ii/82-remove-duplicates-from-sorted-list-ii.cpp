@@ -15,13 +15,11 @@ public:
         ListNode* right = head;
         ListNode* prev = NULL;
         while (right) {
-            ListNode* temp = right;
             right = right->next;
             while (right && right->val == left->val) {
-                temp = right;
                 right = right->next;
             }
-            if (temp != left) {
+            if (right != left->next) {
                 if (prev) {
                     prev->next = right;
                     left = right;
@@ -30,8 +28,8 @@ public:
                     left = right;
                 }
             } else {
+                prev = left;
                 left = right;
-                prev = temp;
             }
         }
         return head;
