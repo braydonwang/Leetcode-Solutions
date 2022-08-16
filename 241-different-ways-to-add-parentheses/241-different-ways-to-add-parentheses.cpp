@@ -1,11 +1,14 @@
 class Solution {
 public:
-    vector<int> diffWaysToCompute(string expression) {
+    vector<int> diff(string expression, int r, int c, vector<vector<vector<int>>>& dp) {
+        if (dp[r][c].size() != 0) {
+            return dp[r][c];
+        }
         vector<int> ans;
-        for (int i = 0; i < expression.size()-1; i++) {
+        for (int i = r; i < c; i++) {
             if (expression[i] == '+' || expression[i] == '-' || expression[i] == '*') {
-                vector<int> l = diffWaysToCompute(expression.substr(0,i));
-                vector<int> r = diffWaysToCompute(expression.substr(i+1));
+                vector<int> l = diff(expression,r,i-1,dp);
+                vector<int> r = diff(expression,i+1,c,dp);
                 for (int left: l) {
                     for (int right: r) {
                         if (expression[i] == '+') {
@@ -20,8 +23,12 @@ public:
             }
         }
         if (ans.size() == 0) {
-            ans.push_back(stoi(expression));
+            ans.push_back(stoi(expression.substr(r,c-r+1)));
         }
-        return ans;
+        return dp[r][c] = ans;
+    }
+    vector<int> diffWaysToCompute(string expression) {
+        vector<vector<vector<int>>> dp(expression.length(),vector<vector<int>>(expression.length()));
+        return diff(expression,0,expression.length()-1,dp);
     }
 };
